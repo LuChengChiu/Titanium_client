@@ -141,7 +141,7 @@ export default function CartProcess({ sumPrice, products }) {
 
         console.log(container, LogisticsSubType);
         container.innerHTML = openMapRes;
-        // setMapReady(openMapRes);
+        setMapReady(openMapRes);
       } else {
         const LogisticsSubType = selectedDelivery.logistic_name.toLowerCase();
         const amount = sumPrice - discountSum + selectedDelivery.logistic_fee;
