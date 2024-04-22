@@ -1,0 +1,139 @@
+:root {
+  --font-DMSans: "DM Sans", sans-serif;
+  --font-PlayfairDisplay: "Playfair Display", serif;
+  --font-TC: "Noto Serif TC", serif;
+  --font-Rubik: "Rubik", sans-serif;
+  --font-Lora: "Lora", serif;
+}
+:root[data-theme="light"] {
+  --text: #0b1818;
+  --background: #f0fafa;
+  --primary: #3fc6c6;
+  --secondary: #92e7e7;
+  /* --accent: #60e6e6; */
+  --accent: #555ae6;
+}
+:root[data-theme="dark"] {
+  --text: #e7f4f4;
+  --background: #050f0f;
+  --primary: #39c0c0;
+  --secondary: #186d6d;
+  /* --accent: #199f9f; */
+  --accent: #191ea9;
+}
+
+#card {
+  width: 35em;
+  max-width: 52vw;
+  width: 100%;
+  background-color: var(--primary);
+  margin: 10px;
+  padding: 10px;
+  border-radius: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-family: var(--font-Rubik);
+  position: relative;
+}
+.cart-img-link {
+  width: 8em;
+  height: 8em;
+}
+.cart-img {
+  height: 100%;
+  border-radius: 20px;
+}
+.card-product-info {
+  width: 11em;
+}
+.card-product-name {
+  font-family: var(--font-TC);
+  font-size: 1em;
+}
+.card-product-brand,
+.card-product-name {
+  font-weight: bold;
+}
+.card-product-detail {
+  font-size: 1.1em;
+}
+.card-unit-price {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-size: 1em;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 3.3em;
+    height: 2px;
+    transform: rotate(-10deg);
+    background-color: red;
+  }
+}
+.card-sale-price {
+  margin-top: 5px;
+}
+.product-quantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5em;
+  height: auto;
+  padding: 0 5px;
+  margin: auto 5px;
+  background-color: var(--background);
+  color: var(--text);
+  border: 2px solid var(--text);
+  border-radius: 12px;
+}
+input[type="number"].card-product-q {
+  width: 1.5em;
+  height: 1.7em;
+  text-align: center;
+  font-size: 1em;
+  background-color: transparent;
+  border: none;
+  border-right: 1px solid var(--text);
+  border-left: 1px solid var(--text);
+  position: relative;
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: none;
+  }
+}
+.card-q-btn {
+  border: none;
+  background-color: transparent;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
+}
+input[type="button"] {
+  display: none;
+}
+.remove-btn {
+  display: block !important;
+  position: absolute;
+  right: -2.2%;
+  background-color: transparent;
+  border: none;
+  font-size: 1.2em;
+  font-family: var(--font-DMSans);
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--text);
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
+}
