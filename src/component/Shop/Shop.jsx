@@ -117,7 +117,7 @@ const ProductCards = ({ productList, filteredList, isLoading }) => {
   }
 };
 
-export default function Shop({ salePage }) {
+export default function Shop({ salePage, collection }) {
   const [productList, setProductList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState({
@@ -134,6 +134,12 @@ export default function Shop({ salePage }) {
   useEffect(() => {
     if (productList.length != 0) {
       setIsLoading(false);
+    }
+    if (salePage) {
+      setSelectedFilter({ ...selectedFilter, price: salePage });
+    }
+    if (collection) {
+      setSelectedFilter({ ...selectedFilter, collections: collection });
     }
   }, [productList]);
   const getProducts = async () => {
@@ -198,7 +204,7 @@ export default function Shop({ salePage }) {
   // filter product list
   useEffect(() => {
     // console.log(productList);
-    // console.log(selectedFilter);
+    console.log(selectedFilter);
     if (productList) {
       let filter = productList;
       if (selectedFilter.collections !== "allbrand") {
@@ -293,46 +299,87 @@ export default function Shop({ salePage }) {
         <div className="sidebar">
           <div className="sidebar-zone">
             <h5 className="sidebar-title">collection</h5>
-            {collections.map((item) => {
-              return (
-                <>
-                  {item.id == "allbrand" ? (
-                    <label
-                      className="sidebar-label-container"
-                      htmlFor={item.id}
-                      key={item.id}
-                    >
-                      <input
-                        type="radio"
-                        name="collections"
-                        id={item.id}
-                        defaultChecked={true}
-                        onChange={(e) => {
-                          filterHandler(e);
-                        }}
-                      />
-                      <span className="label-text">{item.text}</span>
-                    </label>
-                  ) : (
-                    <label
-                      className="sidebar-label-container"
-                      htmlFor={item.id}
-                      key={item.id}
-                    >
-                      <input
-                        type="radio"
-                        name="collections"
-                        id={item.id}
-                        onChange={(e) => {
-                          filterHandler(e);
-                        }}
-                      />
-                      <span className="label-text">{item.text}</span>
-                    </label>
-                  )}
-                </>
-              );
-            })}
+            {collection
+              ? collections.map((item) => {
+                  return (
+                    <>
+                      {item.id == collection ? (
+                        <label
+                          className="sidebar-label-container"
+                          htmlFor={item.id}
+                          key={item.id}
+                        >
+                          <input
+                            type="radio"
+                            name="collections"
+                            id={item.id}
+                            defaultChecked={true}
+                            onChange={(e) => {
+                              filterHandler(e);
+                            }}
+                          />
+                          <span className="label-text">{item.text}</span>
+                        </label>
+                      ) : (
+                        <label
+                          className="sidebar-label-container"
+                          htmlFor={item.id}
+                          key={item.id}
+                        >
+                          <input
+                            type="radio"
+                            name="collections"
+                            id={item.id}
+                            onChange={(e) => {
+                              filterHandler(e);
+                            }}
+                          />
+                          <span className="label-text">{item.text}</span>
+                        </label>
+                      )}
+                    </>
+                  );
+                })
+              : collections.map((item) => {
+                  return (
+                    <>
+                      {item.id == "allbrand" ? (
+                        <label
+                          className="sidebar-label-container"
+                          htmlFor={item.id}
+                          key={item.id}
+                        >
+                          <input
+                            type="radio"
+                            name="collections"
+                            id={item.id}
+                            defaultChecked={true}
+                            onChange={(e) => {
+                              filterHandler(e);
+                            }}
+                          />
+                          <span className="label-text">{item.text}</span>
+                        </label>
+                      ) : (
+                        <label
+                          className="sidebar-label-container"
+                          htmlFor={item.id}
+                          key={item.id}
+                        >
+                          <input
+                            type="radio"
+                            name="collections"
+                            id={item.id}
+                            onChange={(e) => {
+                              filterHandler(e);
+                            }}
+                          />
+                          <span className="label-text">{item.text}</span>
+                        </label>
+                      )}
+                    </>
+                  );
+                })}
           </div>
           <div className="sidebar-zone">
             <h5 className="sidebar-title">category</h5>

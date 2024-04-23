@@ -32,9 +32,9 @@ export default function OrderSuccess() {
     try {
       const userId = "tkHvbJBZ5iMQbQB8d7H81d8odug2";
       const orderNo = userId.substring(0, 5) + new Date().getTime();
-      const sum = 15000;
+      const sum = 8888;
       const logistic = "UNIMARTC2C";
-      const payment = 2;
+      const payment = 1;
       const createRes = await axios
         .post(
           CREATE_ORDER_URL,
@@ -58,11 +58,20 @@ export default function OrderSuccess() {
       console.log("orderCreate Error: ", err);
     }
   };
+  const cloud = async () => {
+    try {
+      const cloudRes = await axios.get("/order/cloud");
+      console.log(cloudRes);
+    } catch (err) {
+      console.log("cloud error:", err);
+    }
+  };
   return (
     <>
       <h1>Order Success</h1>
       <button onClick={orderCheck}>Check it out</button>
       <button onClick={orderCreate}>Create an Order</button>
+      <button onClick={cloud}>CLOUD</button>
     </>
   );
 }

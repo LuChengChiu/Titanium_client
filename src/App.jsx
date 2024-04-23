@@ -9,6 +9,8 @@ import ForgetPwd from "./component/User/ForgetPwd";
 import User from "./component/User/User";
 import Shop from "./component/Shop/Shop";
 import Sale from "./component/Shop/Sale";
+import ShopZippo from "./component/Shop/ShopZippo";
+import ShopAcc from "./component/Shop/ShopAcc";
 import Product from "./component/Products/Product";
 import Cart from "./component/Cart/Cart";
 import OrderSuccess from "./component/Cart/OrderSuccess";
@@ -32,6 +34,8 @@ function App() {
               <Route exact path="forgetPassword" Component={ForgetPwd} />
               <Route exact path="products" Component={Shop} />
               <Route exact path="sale" Component={Sale} />
+              <Route exact path="zippo" Component={ShopZippo} />
+              <Route exact path="acc" Component={ShopAcc} />
               <Route path="products/:id" Component={Product} />
               <Route exact path="/user" Component={ProtectedRoute}>
                 <Route path="/user" Component={User}></Route>

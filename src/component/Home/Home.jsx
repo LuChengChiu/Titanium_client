@@ -14,10 +14,10 @@ export default function HomePage() {
             <h1 className="home-logo">TITANIUM</h1>
             <span className="home-text">Your Every Day Carry items</span>
             <div className="home-links">
-              <NavLink className="home-link" to="#">
+              <NavLink className="home-link" to="zippo">
                 SHOP ZIPPO
               </NavLink>
-              <NavLink className="home-link home-link-rht" to="#">
+              <NavLink className="home-link home-link-rht" to="acc">
                 SHOP ACCESSORY
               </NavLink>
             </div>
