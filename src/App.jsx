@@ -44,6 +44,7 @@ function App() {
               <Route path="/cart/hilifec2c" Component={Hilifec2c} />
               <Route path="/cart/okmartc2c" Component={Okmartc2c} />
               <Route path="/cart/unimartc2c" Component={Unimartc2c} />
+              <Route path="/orderTest" Component={OrderSuccess} />
             </Route>
           </Routes>
         </AuthProvider>

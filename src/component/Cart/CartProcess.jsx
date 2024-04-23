@@ -8,6 +8,7 @@ const DELIVERYWAY_URL = "/cart/delivery";
 const PAYMENTWAY_URL = "/cart/payment";
 const MAP_URL = "/cart/map";
 const ECPAY_URL = "/cart/ecpay";
+const CREATE_ORDER_URL = "/order/create";
 
 export default function CartProcess({ sumPrice, products }) {
   const [discountSum, setDiscountSum] = useState(0);
