@@ -43,6 +43,7 @@ export function AuthProvider({ children }) {
       );
       const tempServerSession = sessionLoginRes.data.sessionCookie;
       document.cookie = `serverSession=${tempServerSession};max-age=300000;secure`;
+      document.cookie = `__session=${tempServerSession};max-age=300000;secure`;
       console.log(
         "tempServerSession",
         tempServerSession,
