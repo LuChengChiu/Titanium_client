@@ -105,7 +105,7 @@ export function AuthProvider({ children }) {
   const sessionCheck = async () => {
     try {
       const checkRes = await axios.get(SESSION_CHECK_URL, {
-        headers: { Authorization: "Bearer " + token },
+        headers: { Authorization: "Bearer " + token, withCredentials: true },
         withCredentials: true,
       });
       return checkRes;
