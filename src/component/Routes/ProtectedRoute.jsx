@@ -8,6 +8,7 @@ export default function ProtectedRoute({ component: Component, ...rest }) {
   console.log("During ProtectedRoute");
   useEffect(() => {
     if (token) {
+      console.log("ProtectedRoute document.cookie: ", document.cookie);
       sessionCheck().then((checkResult) => {
         if (checkResult?.name?.includes("Error")) {
           console.log(checkResult, checkResult.name.includes("Error"));
