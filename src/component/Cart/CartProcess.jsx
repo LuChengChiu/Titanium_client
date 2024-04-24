@@ -34,7 +34,7 @@ export default function CartProcess({ sumPrice, products }) {
     const logisticsRes = await axios.get(DELIVERYWAY_URL);
     // console.log("delivery", logisticsRes.data);
     setLogistics(logisticsRes.data);
-    console.log(logisticsRes.data);
+    console.log(logisticsRes.data, "HI");
   };
   const getPaymentM = async () => {
     const paymentMethodRes = await axios.get(PAYMENTWAY_URL);
