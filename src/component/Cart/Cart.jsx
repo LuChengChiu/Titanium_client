@@ -1,6 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-// import AuthContext from "../context/AuthProvider";
+import React, { useEffect, useState } from "react";
 import axios from "../api/axios";
 import CartItemCard from "./CartItemCard";
 import CartProcess from "./CartProcess";
@@ -15,21 +13,18 @@ const CART_URL = "/cart";
 export default function Cart() {
   const { currentUser } = useAuth();
   const [userId, setUserId] = useState(null);
-  // const auth = useContext(AuthContext);
-
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
   const [sumPrice, setSumPrice] = useState(0);
-  const navigate = useNavigate();
+  const [cartChange, setCartChange] = useState(0);
   useEffect(() => {
-    console.log("test", userId);
     if (currentUser.uid) {
       setUserId(currentUser.uid);
     }
   }, []);
   useEffect(() => {
     getCart();
-  }, [userId]);
+  }, [userId, cartChange]);
 
   const getCart = async () => {
     try {
@@ -41,7 +36,7 @@ export default function Cart() {
           withCredentials: true,
         }
       );
-      console.log("cartRes:", cartRes.data);
+      // console.log("cartRes:", cartRes.data);
       let adjustCart = [];
       cartRes.data.forEach((item) => {
         let sameProduct = adjustCart.find(
@@ -57,7 +52,7 @@ export default function Cart() {
           });
         }
       });
-      console.log("adjustedCart:", adjustCart);
+      // console.log("adjustedCart:", adjustCart);
       setCart(adjustCart);
     } catch (err) {
       console.log("getCart Error:", err);
@@ -89,6 +84,8 @@ export default function Cart() {
           setSumPrice={setSumPrice}
           products={products}
           setProducts={setProducts}
+          cartChange={cartChange}
+          setCartChange={setCartChange}
         ></CartItemCard>
         <div className="line" style={{ marginTop: "1.5em" }}></div>
         <span className="sum-price">

@@ -11,7 +11,7 @@ import "./CartItemCard.css";
 const PRODUCT_ID_URL = "/products/id";
 const REMOVE_CART_URL = "/cart/remove";
 
-const Card = ({ products, setProducts, limitQ }) => {
+const Card = ({ products, setProducts, limitQ, cartChange, setCartChange }) => {
   const [pQ, setPQ] = useState([]);
   const { currentUser } = useAuth();
   const [adjustedProducts, setAdjustedProduct] = useState();
@@ -94,7 +94,7 @@ const Card = ({ products, setProducts, limitQ }) => {
       const userId = currentUser.uid;
       const productId = e.target.name;
       const elementId = e.target.id.substring(7);
-      console.log(userId, productId, e.target.id.substring(7));
+      // console.log(userId, productId, e.target.id.substring(7));
       const removeRes = await axios.post(
         REMOVE_CART_URL,
         { userId, productId },
@@ -103,9 +103,8 @@ const Card = ({ products, setProducts, limitQ }) => {
           withCredentials: true,
         }
       );
-      console.log(removeRes.data);
-      const removeElement = document.querySelector(`.card${elementId}`);
-      removeElement.remove();
+      // console.log(removeRes.data);
+      setCartChange(cartChange + 1);
     } catch (err) {
       console.log("removeHandler Error:", err);
     }
@@ -212,6 +211,8 @@ export default function CartItemCard({
   setSumPrice,
   products,
   setProducts,
+  cartChange,
+  setCartChange,
 }) {
   const [limitQ, setLimitQ] = useState(10);
 
@@ -249,7 +250,7 @@ export default function CartItemCard({
         console.log("Cart getProduct Error:", err);
       }
     }
-    console.log("products", products, productQuantity);
+    // console.log("products", products, productQuantity);
     setProducts(products);
   };
   useEffect(() => {
@@ -275,7 +276,13 @@ export default function CartItemCard({
     <>
       <div>
         {products.length > 0 ? (
-          <Card products={products} setProducts={setProducts} limitQ={limitQ} />
+          <Card
+            products={products}
+            setProducts={setProducts}
+            limitQ={limitQ}
+            cartChange={cartChange}
+            setCartChange={setCartChange}
+          />
         ) : (
           <LoaderEmpty />
         )}

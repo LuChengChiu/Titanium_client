@@ -32,6 +32,7 @@
   text-transform: capitalize;
   font-family: var(--font-Lora);
   color: var(--text);
+  background-color: var(--background);
   user-select: none;
 }
 #orderSuccess > .icon {

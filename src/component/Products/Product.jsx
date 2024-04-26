@@ -1,19 +1,14 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import {
-  useParams,
-  useOutletContext,
-  useNavigate,
-  NavLink,
-} from "react-router-dom";
+import { useParams, useNavigate, NavLink } from "react-router-dom";
 import axios from "../api/axios";
-// import AuthContext from "../context/AuthProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import "./Product.css";
 
 const PRODUCT_ID_URL = "/products/id";
+const PRODUCT_SIDE_URL = "/products/side";
 const WISHLISTCHECK_URL = "/wishlist/check";
 const WISHLISTCHANGE_URL = "/wishlist/change";
 const ADDTOCART_URL = "/cart/add";
@@ -21,6 +16,7 @@ const ADDTOCART_URL = "/cart/add";
 export default function Product2() {
   const [productId, setProductId] = useState(null);
   const [theProduct, setTheProduct] = useState(null);
+  const [sideProduct, setSideProduct] = useState();
   const [mainImg, setMainImg] = useState(null);
   const [productQ, setProductQ] = useState(1);
   const { sessionCheck, currentUser } = useAuth();
@@ -28,6 +24,7 @@ export default function Product2() {
   const [userId, setUserId] = useState(null);
   const [wishlist, setWishList] = useState(false);
   const [addCartSuccess, setAddCartSuccess] = useState(null);
+  const [newPage, setNewPage] = useState(0);
 
   const navigate = useNavigate();
   // Get product info
@@ -36,37 +33,51 @@ export default function Product2() {
   useEffect(() => {
     setProductId(id);
     getTheProduct();
+    getSideProduct();
     setUserId(currentUser?.uid);
     sessionCheck().then((result) => {
       if (result?.name?.includes("Error")) {
-        console.log("Not login");
+        // console.log("Not login");
         setIsLoggedIn(false);
       } else {
-        console.log("Currently Valid Login");
+        // console.log("Currently Valid Login");
         setIsLoggedIn(true);
       }
     });
-    console.log("user", currentUser);
-  }, []);
+  }, [newPage]);
   const getTheProduct = async () => {
-    const theProductRes = await axios
-      .post(PRODUCT_ID_URL, { id })
-      .then((response) => {
-        return response.data;
-      });
-    // console.log(theProductRes);
-    setTheProduct(theProductRes);
+    try {
+      const theProductRes = await axios
+        .post(PRODUCT_ID_URL, { id })
+        .then((response) => {
+          return response.data;
+        });
+      // console.log(theProductRes);
+      setTheProduct(theProductRes);
+    } catch (err) {
+      console.log("getTheProduct Error:", err);
+    }
+  };
+  const getSideProduct = async () => {
+    try {
+      const sideRes = await axios.post(PRODUCT_SIDE_URL, { id });
+      setSideProduct(sideRes.data);
+    } catch (err) {
+      console.log("getSideProduct Error:", err);
+    }
   };
   // Get product info
   // Select Main img
   useEffect(() => {
+    // console.log(theProduct.imgs);
     if (theProduct?.imgs.length > 0) {
       setMainImg(theProduct?.imgs[0]);
     }
     checkWishlist();
   }, [theProduct]);
   const selectImg = (e) => {
-    setMainImg(e.target.id);
+    const selectImg = theProduct?.imgs.find((t) => t.public_id === e.target.id);
+    setMainImg(selectImg);
   };
   // Select Main img
   // Product Q
@@ -118,7 +129,7 @@ export default function Product2() {
               withCredentials: true,
             }
           );
-          console.log("addWishlistRes:", addWishlistRes);
+          // console.log("addWishlistRes:", addWishlistRes);
         } catch (err) {
           console.log("Remove from wishlist Error:", err);
         }
@@ -132,7 +143,7 @@ export default function Product2() {
               withCredentials: true,
             }
           );
-          console.log("removeWishlistRes", removeWishlistRes);
+          // console.log("removeWishlistRes", removeWishlistRes);
         } catch (err) {
           console.log("Add to wishlist Error:", err);
         }
@@ -144,9 +155,6 @@ export default function Product2() {
   // WishList
   // Buy
   const addToCart = async (e) => {
-    console.log("hi", productQ);
-    console.log(e.target.value);
-    console.log("b4", addCartSuccess);
     if (userId) {
       try {
         const addCartRes = await axios.post(
@@ -157,7 +165,7 @@ export default function Product2() {
             withCredentials: true,
           }
         );
-        console.log("addCart res:", addCartRes);
+        // console.log("addCart res:", addCartRes);
         if (addCartRes.data.cart) {
           setAddCartSuccess(true);
         }
@@ -178,13 +186,9 @@ export default function Product2() {
       }, 3990);
     }
   }, [addCartSuccess]);
-  // Buy
-  // useEffect(() => {
-  //   console.log(`Quantity: ${productQ}`);
-  // }, [productQ]);
   return (
     <section id="product">
-      {addCartSuccess ? (
+      {addCartSuccess && (
         <div className="add-cart-success">
           {" "}
           <FontAwesomeIcon
@@ -193,10 +197,27 @@ export default function Product2() {
           />{" "}
           商品已加入購物車 !
         </div>
-      ) : (
-        ""
       )}
-      <div className="side-product side-product-left">HI</div>
+      {sideProduct?.length > 0 && (
+        <NavLink
+          onClick={() => {
+            setNewPage(newPage + 1);
+          }}
+          to={`/products/${
+            sideProduct[0]?.public_id.split("o")[1].split("_")[0]
+          }`}
+        >
+          {" "}
+          <div className="side-product side-product-left">
+            <img
+              className="side-img"
+              src={sideProduct[0]?.secure_url}
+              alt={sideProduct[0].public_id}
+            />
+          </div>
+        </NavLink>
+      )}
+
       <div className="main-product">
         <div className="section-img">
           <img className="img-main" src={mainImg?.secure_url} alt="" />
@@ -358,7 +379,24 @@ export default function Product2() {
           buy now
         </button>
       </div>
-      <div className="side-product side-product-right">HI</div>
+      {sideProduct?.length > 0 && (
+        <NavLink
+          onClick={() => {
+            setNewPage(newPage + 1);
+          }}
+          to={`/products/${
+            sideProduct[1]?.public_id.split("o")[1].split("_")[0]
+          }`}
+        >
+          <div className="side-product side-product-right">
+            <img
+              className="side-img"
+              src={sideProduct[1]?.secure_url}
+              alt={sideProduct[1]?.public_id}
+            />
+          </div>
+        </NavLink>
+      )}
     </section>
   );
 }

@@ -40,6 +40,7 @@
   align-content: space-evenly;
   padding: 0.5em 0.7em;
   font-size: 1.2em;
+  color: var(--text);
 }
 .card-name {
   font-size: 0.9em;
@@ -58,7 +59,7 @@
   text-transform: capitalize;
   font-family: var(--font-Rubik);
   font-size: 1.2em;
-  width: 14em;
+  width: 15em;
   padding: 0.5em;
   border-radius: 20px;
   position: fixed;

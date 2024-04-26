@@ -10,11 +10,12 @@
 .empty-label {
   font-size: 2em;
   font-family: var(--font-Rubik);
+  color: var(--text);
 }
 .empty-link {
   height: 1.7em;
   font-size: 1.5em;
-  color: var(--accent);
+  color: var(--text);
   font-weight: bold;
   font-family: var(--font-Lora);
   margin: 0.6em 0 1em;

@@ -204,7 +204,7 @@ export default function Shop({ salePage, collection }) {
   // filter product list
   useEffect(() => {
     // console.log(productList);
-    console.log(selectedFilter);
+    // console.log(selectedFilter);
     if (productList) {
       let filter = productList;
       if (selectedFilter.collections !== "allbrand") {
@@ -237,7 +237,7 @@ export default function Shop({ salePage, collection }) {
               );
             });
           }
-          console.log("current price filter", selectedFilter.price);
+          // console.log("current price filter", selectedFilter.price);
         } else if (selectedFilter.price == "sale") {
           filter = filter.filter((product) => {
             return product.sale !== null;
@@ -268,17 +268,17 @@ export default function Shop({ salePage, collection }) {
   const changeOrder = (orderList) => {
     if (sort == orders[0].id) {
       orderList.sort((a, b) => b.product_id - a.product_id);
-      console.log(" new first", orderList);
+      // console.log(" new first", orderList);
     } else if (sort == orders[1].id) {
       orderList.sort((a, b) => a.product_id - b.product_id);
-      console.log("old first", orderList);
+      // console.log("old first", orderList);
     } else if (sort.includes("price")) {
       if (sort.substring(5, 9) == "High") {
         orderList = orderList.sort((a, b) => b.price - a.price);
-        console.log("price high 1st", orderList);
+        // console.log("price high 1st", orderList);
       } else {
         orderList.sort((a, b) => a.price - b.price);
-        console.log("price low first", orderList);
+        // console.log("price low first", orderList);
       }
     }
     return orderList;
