@@ -20,7 +20,6 @@ export default function Register() {
   const [emailFocus, setEmailFocus] = useState(false);
 
   const [pwd, setPwd] = useState("");
-
   const [validPwd, setValidPwd] = useState(false);
   const [pwdFocus, setPwdFocus] = useState(false);
 

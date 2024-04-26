@@ -36,7 +36,7 @@ export default function Product2() {
   useEffect(() => {
     setProductId(id);
     getTheProduct();
-    setUserId(currentUser.uid);
+    setUserId(currentUser?.uid);
     sessionCheck().then((result) => {
       if (result?.name?.includes("Error")) {
         console.log("Not login");

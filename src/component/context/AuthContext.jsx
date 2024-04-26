@@ -10,6 +10,7 @@ import {
   updateProfile,
   setPersistence,
   browserSessionPersistence,
+  updatePassword,
 } from "firebase/auth";
 import axios from "../api/axios.js";
 import CryptoJS from "crypto-js";
@@ -42,10 +43,10 @@ export function AuthProvider({ children }) {
         }
       );
       const tempServerSession = sessionLoginRes.data.sessionCookie;
-      document.cookie = `serverSession=${tempServerSession}; domain=.zeabur.app; max-age=300000; secure`;
-      document.cookie = `__session=${tempServerSession}; domain=.zeabur.app; max-age=300000; secure`;
-      // document.cookie = `serverSession=${tempServerSession}; max-age=300000; secure`;
-      // document.cookie = `__session=${tempServerSession}; max-age=300000; secure`;
+      document.cookie = `serverSession=${tempServerSession}; domain=.zeabur.app; max-age=60000; secure`;
+      document.cookie = `__session=${tempServerSession}; domain=.zeabur.app; max-age=60000; secure`;
+      // document.cookie = `serverSession=${tempServerSession}; max-age=60000; secure`;
+      // document.cookie = `__session=${tempServerSession}; max-age=60000; secure`;
       console.log(
         "tempServerSession",
         tempServerSession,
@@ -92,7 +93,7 @@ export function AuthProvider({ children }) {
       .then((user) => {
         console.log(user);
         return user.user.getIdToken().then((idToken) => {
-          document.cookie = `session=${idToken};max-age=3600000`;
+          document.cookie = `session=${idToken};max-age=60000`;
           generateCSRFToken();
           return postIdTokenToSessionLogin(
             SESSION_LOGIN_URL,
@@ -127,8 +128,18 @@ export function AuthProvider({ children }) {
     });
     return signOut(auth);
   };
-  const resetPwd = (email) => {
+  const forgetPwd = (email) => {
     return sendPasswordResetEmail(auth, email);
+  };
+  const changePwd = async (newPwd) => {
+    try {
+      const user = auth.currentUser;
+      await updatePassword(user, newPwd);
+      const changeSuccessMsg = "Your password has been edited.";
+      return changeSuccessMsg;
+    } catch (err) {
+      console.log("chagePwd Error:", err);
+    }
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -146,9 +157,10 @@ export function AuthProvider({ children }) {
     signup,
     login,
     logout,
-    resetPwd,
+    forgetPwd,
     token,
     sessionCheck,
+    changePwd,
   };
 
   return (

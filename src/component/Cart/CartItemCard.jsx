@@ -198,14 +198,14 @@ const Card = ({ products, setProducts, limitQ }) => {
     </>
   );
 };
-const LoadorEmpty = () => {
+const LoaderEmpty = () => {
   const [load, setLoad] = useState(true);
   useEffect(() => {
     setTimeout(() => {
       setLoad(false);
     }, 2000);
   }, []);
-  return <>({load ? <Loading /> : <EmptyCart />})</>;
+  return <>{load ? <Loading /> : <EmptyCart />}</>;
 };
 export default function CartItemCard({
   cart,
@@ -277,7 +277,7 @@ export default function CartItemCard({
         {products.length > 0 ? (
           <Card products={products} setProducts={setProducts} limitQ={limitQ} />
         ) : (
-          <LoadorEmpty />
+          <LoaderEmpty />
         )}
       </div>
     </>

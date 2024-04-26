@@ -1,0 +1,87 @@
+:root {
+  --font-DMSans: "DM Sans", sans-serif;
+  --font-PlayfairDisplay: "Playfair Display", serif;
+  --font-TC: "Noto Serif TC", serif;
+  --font-Rubik: "Rubik", sans-serif;
+  --font-Lora: "Lora", serif;
+}
+:root[data-theme="light"] {
+  --text: #0b1818;
+  --background: #f0fafa;
+  --primary: #3fc6c6;
+  --secondary: #92e7e7;
+  /* --accent: #60e6e6; */
+  --accent: #555ae6;
+}
+:root[data-theme="dark"] {
+  --text: #e7f4f4;
+  --background: #050f0f;
+  --primary: #39c0c0;
+  --secondary: #186d6d;
+  /* --accent: #199f9f; */
+  --accent: #191ea9;
+}
+#orderSuccess {
+  width: 100%;
+  height: 77vh;
+  height: 77dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  font-family: var(--font-Lora);
+  color: var(--text);
+  user-select: none;
+}
+#orderSuccess > .icon {
+  font-size: 7em;
+}
+#orderSuccess > .title {
+  font-size: 2.8em;
+  margin: 0.5em;
+  font-weight: bold;
+}
+.success-link {
+  font-size: 1.8em;
+  letter-spacing: -0.5px;
+  margin-top: 0.2em;
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  color: white;
+  background-color: var(--primary);
+  transform: all 300ms ease;
+  &:hover {
+    background-color: var(--secondary);
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  #orderSuccess {
+    .icon {
+      font-size: 6em;
+    }
+    .title {
+      font-size: 2em;
+    }
+  }
+  .success-link {
+    font-size: 1.5em;
+  }
+}
+
+@media only screen and (min-height: 1050px) {
+  #orderSuccess {
+    height: 82vh;
+    height: 82dvh;
+    .icon {
+      font-size: 10em;
+    }
+    .title {
+      font-size: 4em;
+    }
+  }
+  .success-link {
+    font-size: 2.5em;
+  }
+}

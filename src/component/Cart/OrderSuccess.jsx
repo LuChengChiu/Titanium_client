@@ -1,5 +1,8 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import axios from "../api/axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { far } from "@fortawesome/free-regular-svg-icons";
 import "./OrderSuccess.css";
 
 const CHECK_ORDER_URL = "/order";
@@ -68,10 +71,13 @@ export default function OrderSuccess() {
   };
   return (
     <>
-      <h1>Order Success</h1>
-      <button onClick={orderCheck}>Check it out</button>
-      <button onClick={orderCreate}>Create an Order</button>
-      <button onClick={cloud}>CLOUD</button>
+      <section id="orderSuccess">
+        <FontAwesomeIcon className="icon" icon={far.faThumbsUp} />
+        <span className="title">your order has been made!</span>
+        <NavLink className="success-link" to="/user/orders">
+          check your orders
+        </NavLink>
+      </section>
     </>
   );
 }

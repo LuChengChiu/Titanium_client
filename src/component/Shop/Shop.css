@@ -5,34 +5,7 @@
   --font-Rubik: "Rubik", sans-serif;
   --font-Lora: "Lora", serif;
 }
-/* :root[data-theme="light"] {
-  --text: #14100f;
-  --background: #f9f7f7;
-  --primary: #977974;
-  --secondary: #c3b3b1;
-  --accent: #ed2c5c;
-} */
-/* :root[data-theme="dark"] {
-  --text: #f0eceb;
-  --background: #090707;
-  --primary: #8c6e69;
-  --secondary: #4e3e3c;
-  --accent: #d31243;
-} */
-/* :root[data-theme="light"] {
-  --text: #05050a;
-  --background: #f7f7fc;
-  --primary: #4348cf;
-  --secondary: #8589ea;
-  --accent: #4c52ec;
-}
-:root[data-theme="dark"] {
-  --text: #f5f5fa;
-  --background: #030307;
-  --primary: #3035bb;
-  --secondary: #15187a;
-  --accent: #1318b4;
-} */
+
 :root[data-theme="light"] {
   --text: #0b1818;
   --background: #f0fafa;

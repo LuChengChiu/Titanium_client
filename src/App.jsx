@@ -7,6 +7,11 @@ import Register from "./component/User/Register";
 import Login from "./component/User/Login";
 import ForgetPwd from "./component/User/ForgetPwd";
 import User from "./component/User/User";
+import Profile from "./component/User/Profile";
+import ChangePwd from "./component/User/ChangePwd";
+import Orders from "./component/User/Orders";
+import OrderDetail from "./component/User/OrderDetail";
+import Wishlist from "./component/User/Wishlist";
 import Shop from "./component/Shop/Shop";
 import Sale from "./component/Shop/Sale";
 import ShopZippo from "./component/Shop/ShopZippo";
@@ -38,7 +43,13 @@ function App() {
               <Route exact path="acc" Component={ShopAcc} />
               <Route path="products/:id" Component={Product} />
               <Route exact path="/user" Component={ProtectedRoute}>
-                <Route path="/user" Component={User}></Route>
+                <Route path="/user" Component={User}>
+                  <Route index Component={Profile} />
+                  <Route path="changePassword" Component={ChangePwd} />
+                  <Route path="orders" Component={Orders} />
+                  <Route path="orders/:orderId" Component={OrderDetail} />
+                  <Route path="wishlist" Component={Wishlist} />
+                </Route>
               </Route>
               <Route path="/cart" Component={ProtectedRoute}>
                 <Route index Component={Cart} />
@@ -48,7 +59,6 @@ function App() {
               <Route path="/cart/hilifec2c" Component={Hilifec2c} />
               <Route path="/cart/okmartc2c" Component={Okmartc2c} />
               <Route path="/cart/unimartc2c" Component={Unimartc2c} />
-              <Route path="/orderTest" Component={OrderSuccess} />
             </Route>
           </Routes>
         </AuthProvider>

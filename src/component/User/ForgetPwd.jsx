@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./ForgetPwd.css";
 export default function ForgetPwd() {
   const emailRef = useRef();
-  const { resetPwd } = useAuth();
+  const { ForgetPwd } = useAuth();
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);

@@ -1,0 +1,33 @@
+#profile {
+  font-family: var(--font-Rubik);
+}
+.user-title {
+  font-size: 2.4em;
+}
+.info-table {
+  margin-top: 1em;
+  background-color: var(--secondary);
+  border-radius: 5px;
+  padding: 1.2em;
+  th,
+  td {
+    font-size: 1.5em;
+    color: var(--text);
+    vertical-align: middle;
+    padding: 0.5em;
+  }
+  th {
+    text-transform: capitalize;
+    width: 7em;
+    text-align: start;
+  }
+  td {
+    font-size: 1.5em;
+    width: 12em;
+    text-align: center;
+    a {
+      font-size: 0.8em;
+      font-family: var(--font-DMSans);
+    }
+  }
+}

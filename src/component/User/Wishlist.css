@@ -1,0 +1,109 @@
+#wishlist {
+  font-family: var(--font-Rubik);
+  color: var(--text);
+  text-transform: capitalize;
+}
+.wishlist-cards {
+  display: grid;
+  font-family: var(--font-Rubik);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 280px));
+  column-gap: 0.5em;
+  row-gap: 1em;
+  margin-top: 1em;
+}
+.card-frame {
+  position: relative;
+}
+.wish-card {
+  display: flex;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  &:hover {
+    .wish-card-text {
+      transform: translateY(-0.7em);
+    }
+    .wish-card-img {
+      transform: scale(1.15);
+    }
+  }
+}
+.wish-card-img {
+  width: 100%;
+  border-radius: inherit;
+  transition: transform 500ms ease;
+}
+.wish-card-text {
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  font-family: var(--font-TC);
+  font-size: 1.2em;
+  transform: translateY(2.5em);
+  transition: transform 300ms ease;
+  color: var(--text);
+  background-color: var(--background);
+  opacity: 0.7;
+  padding: 0.2em 0.5em;
+}
+.wish-heart {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  font-size: 1.5em;
+  z-index: 5;
+  background-color: transparent;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  transition: transform 300ms ease;
+  &:hover {
+    transform: translate(-8%, -8%);
+    .heart {
+      background: radial-gradient(at 70% 31%, var(--accent) 29%, #0000 30%),
+        radial-gradient(at 30% 31%, var(--accent) 29%, #0000 30%),
+        conic-gradient(from -45deg at 50% 84%, var(--accent) 90deg, #0000 0)
+          bottom/100% 50% no-repeat;
+    }
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: -12%;
+    right: -12%;
+    width: 125%;
+    height: 115%;
+    background-color: #ddfff7;
+    opacity: 0.8;
+    border-radius: 5px;
+    z-index: -1;
+  }
+}
+.heart {
+  width: 1em;
+  aspect-ratio: 1/1;
+  background: radial-gradient(at 70% 31%, var(--primary) 29%, #0000 30%),
+    radial-gradient(at 30% 31%, var(--primary) 29%, #0000 30%),
+    conic-gradient(from -45deg at 50% 84%, var(--primary) 90deg, #0000 0)
+      bottom/100% 50% no-repeat;
+  transition: all 300ms ease;
+}
+/* Empty Wishlist */
+.empty-wish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(-25%);
+  margin-top: 3em;
+  color: var(--text);
+
+  > p {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 1em 0 0.5em;
+  }
+}
+.empty-wish-title {
+  font-weight: 300;
+  font-size: 2em;
+}

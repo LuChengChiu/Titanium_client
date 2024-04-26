@@ -1,0 +1,63 @@
+#changePwd {
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-top: 2em;
+  padding-top: 1.5em;
+  width: 31em;
+  height: 25em;
+  color: var(--text);
+}
+.pwd-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.7em;
+  width: 100%;
+  label {
+    border: 2px solid var(--primary);
+    border-radius: 5px;
+    width: 10em;
+    margin: 5px;
+  }
+}
+.change-instr {
+  width: 100%;
+  text-align: start;
+  margin-left: 5.5em;
+  letter-spacing: -0.7px;
+}
+.change-ring {
+  padding: 1em 1.5em;
+  border-radius: 16px;
+  background-color: var(--secondary);
+  font-size: 1.1em;
+  position: absolute;
+  top: -3em;
+  left: 4em;
+}
+.editPwd-btn {
+  width: 13em;
+  height: 2.2em;
+  margin-top: 1em;
+  font-size: 1.5em;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: capitalize;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--accent);
+  color: white;
+  transform: translate(0, 0);
+  transition: box-shadow 300ms ease, transform 300ms ease;
+  &:hover:enabled {
+    box-shadow: 3px 3px 0px 1px var(--primary);
+    transform: translate(-5px, -5px);
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

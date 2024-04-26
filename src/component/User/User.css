@@ -1,0 +1,125 @@
+:root {
+  --font-DMSans: "DM Sans", sans-serif;
+  --font-PlayfairDisplay: "Playfair Display", serif;
+  --font-TC: "Noto Serif TC", serif;
+  --font-Rubik: "Rubik", sans-serif;
+  --font-Lora: "Lora", serif;
+}
+:root[data-theme="light"] {
+  --text: #0b1818;
+  --background: #f0fafa;
+  --primary: #3fc6c6;
+  --secondary: #92e7e7;
+  /* --accent: #60e6e6; */
+  --accent: #555ae6;
+}
+:root[data-theme="dark"] {
+  --text: #e7f4f4;
+  --background: #050f0f;
+  --primary: #39c0c0;
+  --secondary: #186d6d;
+  /* --accent: #199f9f; */
+  --accent: #191ea9;
+}
+#user {
+  width: 100%;
+  height: 90vh;
+  height: 90dvh;
+  display: flex;
+  color: var(--text);
+  user-select: none;
+  font-family: var(--font-DMSans);
+  background-color: var(--background);
+}
+.user-side {
+  background-color: yellow;
+  min-width: 15em;
+  width: 15%;
+  height: 100vh;
+  border-right: 1.5px solid var(--primary);
+  background: var(--background);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 3em 0;
+  > ul > li {
+    width: 100%;
+    width: 10em;
+  }
+}
+.side-title {
+  font-size: 1.5em;
+  font-family: var(--font-Rubik);
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+  margin-bottom: 1em;
+  padding-right: 0.5em;
+}
+.side-list {
+  margin: 1em 0;
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 1%;
+    width: 90%;
+    height: 2px;
+    background-color: var(--primary);
+    transform: scale(0, 1) translateY(8px);
+    border-radius: 20px;
+    opacity: 0.7;
+    transition: transform 300ms ease, opacity 500ms ease;
+  }
+  &:hover {
+    &::after {
+      opacity: 1;
+      transform: scale(1, 1) translateY(3px);
+    }
+  }
+}
+
+.side-link {
+  font-size: 2em;
+  font-family: var(--font-PlayfairDisplay);
+  font-weight: bold;
+  text-transform: capitalize;
+  color: var(--text);
+  position: relative;
+  &:hover {
+    color: var(--primary);
+  }
+  &.active {
+    color: var(--primary);
+  }
+}
+.link-icon {
+  font-size: 0.9em;
+}
+
+.btn-logout {
+  font-size: 1.2em;
+  font-family: var(--font-Lora);
+  border-radius: 12px;
+  border: none;
+  background-color: var(--primary);
+  color: white;
+  padding: 0.6em 1em;
+  cursor: pointer;
+  position: absolute;
+  bottom: 15%;
+  z-index: 100;
+  transform: scale(1);
+  transition: transform 300ms ease;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+.user-main {
+  padding: 5% 0 0 2.5em;
+  width: 85%;
+}

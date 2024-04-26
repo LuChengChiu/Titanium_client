@@ -96,6 +96,7 @@ input[type="number"].card-product-q {
   text-align: center;
   font-size: 1em;
   background-color: transparent;
+  color: var(--text);
   border: none;
   border-right: 1px solid var(--text);
   border-left: 1px solid var(--text);

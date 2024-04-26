@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "../api/axios";
 import { NavLink } from "react-router-dom";
-import ConfirmOrder from "./ConfirmOrder";
+import { useAuth } from "../context/AuthContext";
 import "./CartProcess.css";
 
 const DELIVERYWAY_URL = "/cart/delivery";
-const PAYMENTWAY_URL = "/cart/payment";
 const MAP_URL = "/cart/map";
 const ECPAY_URL = "/cart/ecpay";
 const CREATE_ORDER_URL = "/order/create";
+const CREATE_ORDERITEM_URL = "/order/createItem";
+const CARTTOORDER = "/cart/turnOrder";
 
 export default function CartProcess({ sumPrice, products }) {
+  const { currentUser } = useAuth();
   const [discountSum, setDiscountSum] = useState(0);
   const [logistics, setLogistics] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState([
@@ -24,10 +26,8 @@ export default function CartProcess({ sumPrice, products }) {
   });
   const [mapReady, setMapReady] = useState();
   const [payReady, setPayReady] = useState();
-  const [nextProcess, setNextProcess] = useState(false);
   useEffect(() => {
     getDeliveryM();
-    // getPaymentM();
   }, []);
 
   const getDeliveryM = async () => {
@@ -35,11 +35,6 @@ export default function CartProcess({ sumPrice, products }) {
     // console.log("delivery", logisticsRes.data);
     setLogistics(logisticsRes.data);
     console.log(logisticsRes.data, "HI");
-  };
-  const getPaymentM = async () => {
-    const paymentMethodRes = await axios.get(PAYMENTWAY_URL);
-    console.log("payment", paymentMethodRes.data);
-    setPaymentMethod(paymentMethodRes.data);
   };
   useEffect(() => {
     let tempDiscountSum = 0;
@@ -101,7 +96,6 @@ export default function CartProcess({ sumPrice, products }) {
   };
   const processPhaseHandler = async (e) => {
     e.preventDefault();
-    // setNextProcess(!nextProcess);
     const itemName = (description) => {
       for (let i = 0; i < products.length; i++) {
         description += products[i].product.info.name + " x " + products[i].q;
@@ -120,7 +114,60 @@ export default function CartProcess({ sumPrice, products }) {
     try {
       const LogisticsSubType = selectedDelivery.logistic_name;
       const IsCollection = selectedDelivery.payment_method;
-      console.log(IsCollection, LogisticsSubType);
+      const userId = currentUser.uid;
+      const orderNo = userId.substring(0, 5) + new Date().getTime();
+      const sum = sumPrice - discountSum + selectedDelivery.logistic_fee;
+      const values4Item = products.map((item) => {
+        const productId = item.product.info.product_id;
+        const quantity = item.q;
+        const price = item.product.info.sale
+          ? item.product.info.sale
+          : item.product.info.price;
+        return [
+          orderNo + productId,
+          orderNo,
+          productId,
+          quantity,
+          price,
+          quantity * price,
+        ];
+      });
+      const removeCartValue = products.map((item) => {
+        const productId = item.product.info.product_id;
+        return [userId, productId];
+      });
+      console.log(removeCartValue);
+      const createOrderRes = await axios
+        .post(
+          CREATE_ORDER_URL,
+          { orderNo, userId, sum, LogisticsSubType, IsCollection },
+          {
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            withCredentials: true,
+          }
+        )
+        .then((result) => {
+          return result.data;
+        });
+      const createOrderItemRes = await axios.post(
+        CREATE_ORDERITEM_URL,
+        { values4Item },
+        {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          withCredentials: true,
+        }
+      );
+      const deleteCart = await axios.post(
+        CARTTOORDER,
+        { removeCartValue },
+        {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          withCredentials: true,
+        }
+      );
+      console.log(deleteCart);
+      console.log(createOrderItemRes);
+      console.log(createOrderRes);
       if (IsCollection == "Y") {
         const openMapRes = await axios
           .post(
@@ -198,23 +245,9 @@ export default function CartProcess({ sumPrice, products }) {
   }, [mapReady, payReady]);
   return (
     <section id="cart-process">
-      {/* <div className="process-phase">
-        <span className="phase-text">
-          {nextProcess ? "almost done" : "fill information"}
-        </span>
-        <button onClick={processPhaseHandler}>GG</button>
-        <div className="process-bar">
-          <div
-            className={
-              nextProcess
-                ? "process-bar-start process-bar-move"
-                : "process-bar-start"
-            }
-          ></div>
-        </div>
-      </div> */}
-      <div className={nextProcess ? "phase-all phase-move" : "phase-all"}>
-        <div className={nextProcess ? "phase " : "phase"}>
+      <div className="phase-all">
+        <span className="process-title-big">fill information</span>
+        <div className="phase">
           <div className="method-selection">
             <h4 className="process-title">delivery & payment method</h4>
             <label htmlFor="delivery-way" className="method-label">
@@ -286,7 +319,6 @@ export default function CartProcess({ sumPrice, products }) {
           <button className="process-btn" onClick={processPhaseHandler}>
             go checkout
           </button>
-          <NavLink to="/cart/orderSuccess">Next</NavLink>
         </div>
         <div id="mapContainer"></div>
       </div>
