@@ -34,7 +34,7 @@ export default function HomePage() {
         <div className="home-section home-2">
           <h2 className="home2-title">collections</h2>
           <div className="home2-main">
-            <NavLink to="#">
+            <NavLink to="zippo">
               <div className="home2-sec">
                 <img className="home2-img" src={home2Img1} alt="" />
                 <span className="home2-text">
@@ -43,7 +43,7 @@ export default function HomePage() {
                 </span>
               </div>
             </NavLink>
-            <NavLink to="#">
+            <NavLink to="acc">
               <div className="home2-sec">
                 <img className="home2-img" src={home2Img2} alt="" />
                 <span className="home2-text">

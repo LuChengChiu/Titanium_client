@@ -184,3 +184,138 @@
     transform: translateY(0);
   }
 }
+
+@media screen and (max-width: 1570px) {
+  .home2-img {
+    width: 100%;
+  }
+  .home2-text {
+    left: 0;
+    transform: translateX(32%);
+    font-size: 2.5em;
+  }
+  .home-1 {
+    padding: 0 3%;
+  }
+  .home-logo {
+    font-size: 4.5em;
+  }
+  .home-text {
+    font-size: 1.5em;
+  }
+  .home-right {
+    video {
+      width: 30em;
+      border-radius: 20px;
+    }
+  }
+}
+@media screen and (max-width: 1050px) {
+  .home-1 {
+    padding: 0 3%;
+  }
+  .home-logo {
+    font-size: 2.5em;
+  }
+  .home-links {
+    margin-right: 0;
+  }
+  .home-link {
+    padding: 5px 10px;
+    font-size: 0.8em;
+    width: 5em;
+  }
+  .home-link-rht {
+    width: 7.5em;
+  }
+  .home-text {
+    font-size: 1.2em;
+  }
+  .home-right {
+    video {
+      width: 22em;
+      border-radius: 20px;
+    }
+  }
+  .home2-title {
+    font-size: 2em;
+  }
+  .home2-img {
+    width: 100%;
+  }
+  .home2-text {
+    left: 0%;
+    /* transform: translateX(17%); */
+    font-size: 3vw;
+  }
+}
+@media screen and (max-width: 780px) {
+  .home-1 {
+    padding: 0 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .home-logo {
+    font-size: 4em;
+  }
+  .home-link {
+    padding: 5px 10px;
+    font-size: 1em;
+    width: 5em;
+  }
+  .home-link-rht {
+    width: 7.5em;
+  }
+  .home-text {
+    font-size: 1.5em;
+    width: 100%;
+  }
+  .home-left {
+    width: 100%;
+  }
+  .home-right {
+    video {
+      width: 25em;
+      border-radius: 20px;
+    }
+  }
+  .home2-title {
+    font-size: 2em;
+  }
+  .home2-img {
+    width: 100%;
+  }
+  .home2-text {
+    left: -1.5vw;
+    /* transform: translateX(17%); */
+    font-size: 6vw;
+  }
+  .home2-main {
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (max-width: 500px) {
+  .home-logo {
+    font-size: 2.5em;
+  }
+  .home-link {
+    padding: 5px 10px;
+    font-size: 0.8em;
+    width: 5em;
+  }
+  .home-link-rht {
+    width: 10em;
+  }
+  .home-right {
+    video {
+      width: 20em;
+      border-radius: 20px;
+    }
+  }
+  .home2-text {
+    left: -5vw;
+    /* transform: translateX(17%); */
+    font-size: 6vw;
+  }
+}
