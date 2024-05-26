@@ -1,8 +1,15 @@
-# React + Vite
+ # 電商網站 - Titanium
+此網站為一個電商品牌網站，品牌名為Titanium，主要販售打火機與其周邊燒品以及一些飾品。
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+金流與物流串接台灣綠界科技的測試環境。
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+本Repository儲存的為此電商網站的前端/Client端。
+ # Built with
+  - React.js
+  - CSS3
+  - Node.js
+  - Express.js
+  - MySQL
+  - Google Cloud Platform SQL
+  - Zeabur
+  - VsCode
