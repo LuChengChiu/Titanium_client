@@ -442,7 +442,6 @@ input[type="number"].input-q {
     justify-content: center;
   }
   .main-product {
-    /* width: 70%; */
     min-width: 30rem;
   }
   .side-product {
@@ -529,13 +528,13 @@ input[type="number"].input-q {
 }
 @media screen and (max-width: 550px) {
   .main-product {
-    width: 25em;
-    max-width: 80%;
-    margin: auto 10px;
+    min-width: auto;
+    max-width: 93% !important;
     height: 85%;
   }
   .section-img > .img-main {
     width: 22em;
+    max-width: 95%;
   }
   .section-img {
     display: flex;
@@ -546,6 +545,7 @@ input[type="number"].input-q {
   }
   .img-side {
     width: 4.5em;
+    margin: 0 3px;
   }
   .imgs-frame {
     display: flex;
@@ -557,5 +557,31 @@ input[type="number"].input-q {
     &::-webkit-scrollbar {
       height: 7px;
     }
+  }
+  .section-info {
+    margin: 0 1em;
+    grid-template:
+      "bName . wish" 1.8em
+      "pName pSize pNumber" 2.5em
+      "price exInfo exInfo" 3em;
+    .product-name {
+      font-size: 1.2em;
+    }
+  }
+  input[type="number"].input-q {
+    height: 1.3em;
+  }
+  .wishlist-check {
+    margin-top: 1em;
+  }
+  .ex-info {
+    font-size: 0.8em;
+  }
+  .ex-info-list {
+    font-size: 0.85em;
+  }
+  .cta-btn {
+    padding: 0.4em;
+    font-size: 0.8em;
   }
 }
